@@ -12,7 +12,7 @@ namespace cisco\service;
 class dbinterface {
 
     private $dbconfig = array();
-    private  $parent_class = null;
+    private $parent_class = null;
     protected $db_mysql = null;
     public $autoReconnect = true;
     protected $autoReconnectCount = 0;
@@ -112,9 +112,8 @@ class dbinterface {
             return false;
         return $this->resultSetToArray($res);
     }
-    
-    
-    function get_device_info($function='',$param = array()) {
+
+    function get_device_info($function = '', $param = array()) {
         switch ($function) {
             case 'device_login':
                 $res = $this->device_login($param);
@@ -147,9 +146,10 @@ class dbinterface {
         $req = $this->dbGet($sql);
         if (empty($req)) {
             return null;
-        } 
+        }
         return $req[0];
     }
+
     private function device_login($param = array()) {
         $sql = "SELECT name, _description from  sccpdevice where _profileid!='0' and name='" . $param['name'] . "';";
         $req = $this->dbGet($sql);
@@ -159,8 +159,8 @@ class dbinterface {
     }
 
     private function User_login($param = array()) {
-        $id = (empty($param['profile_id'])) ? 0: $param['profile_id']; 
-        $sql = "UPDATE `sccpdevice` SET `_profileid`='". $id ."', `_loginname`='" . $param['userid'] . "' WHERE  `name`='" . $param['name'] . "';";
+        $id = (empty($param['profile_id'])) ? 0 : $param['profile_id'];
+        $sql = "UPDATE `sccpdevice` SET `_profileid`='" . $id . "', `_loginname`='" . $param['userid'] . "' WHERE  `name`='" . $param['name'] . "';";
         $req = $this->dbQuery($sql);
         return $req;
     }
@@ -174,10 +174,10 @@ class dbinterface {
         $req = $this->dbQuery($sql);
         return $req;
     }
-    
+
     private function Device_logout($param = array()) {
-        $sql = "SELECT name from sccpdevice where `_loginname`='" . $param['userid'] . "' and _profileid != '0' and `name` != '". $param['name'] ."';";
-        $req = $this-> dbGet($sql);
+        $sql = "SELECT name from sccpdevice where `_loginname`='" . $param['userid'] . "' and _profileid != '0' and `name` != '" . $param['name'] . "';";
+        $req = $this->dbGet($sql);
         if (!empty($req)) {
             foreach ($req as $value) {
                 $this->User_logout(array('name' => $value['name']));
@@ -190,13 +190,14 @@ class dbinterface {
      * Get User Profile
      * 
      */
+
     private function get_profile_id($param = array()) {
         $sql = "SELECT name, roaminglogin, auto_logout, homedevice from  sccpuser where `name`='" . $param['userid'] . "';";
         $req = $this->dbGet($sql);     // User validate 
         if (empty($req)) {
             return 0;
         }
-        $res = (empty($req[0]['homedevice'])) ? 1: 2;
+        $res = (empty($req[0]['homedevice'])) ? 1 : 2;
         return $res;
     }
 
@@ -204,11 +205,12 @@ class dbinterface {
      * Check User and Permission
      * 
      */
+
     private function validate_login($param = array()) {
 //        $sql = "SELECT name, _rouminglogin from  sccpline where `name`='" . $param['user'] . "' and `pin`='" . $param['pin'] . "';";
 
         $sql = "SELECT name, roaminglogin, auto_logout, homedevice from  sccpuser where `name`='" . $param['userid'] . "' and `pin`='" . $param['pincode'] . "';";
-        $req = $this->dbGet($sql);     
+        $req = $this->dbGet($sql);
         $res = array('result' => false, 'error_msg' => 'Internal Error');
         if (empty($req)) {
             return array('result' => false, 'error_msg' => 'Login false');
@@ -219,11 +221,11 @@ class dbinterface {
         }
         $dev_map = (empty($req[0]['homedevice'])) ? $param['userid'] : $req[0]['homedevice'];
         $auto_kill = $req[0]['auto_logout'];
-        
+
         $sql = "SELECT * from  sccpbuttonconfig where `ref`='" . $dev_map . "';";
         $req = $this->dbGet($sql);     // User validate 
         if (empty($req)) {
-            return array('result' => false, 'error_msg' => 'No found user profile :'. $dev_map );
+            return array('result' => false, 'error_msg' => 'No found user profile :' . $dev_map);
         }
 
         if ($romuming == 'on') {
@@ -237,7 +239,6 @@ class dbinterface {
             } else {
                 $res = array('result' => true, 'error_msg' => 'User validate Ok');
             }
-            
         } else {
             $res = array('result' => true, 'error_msg' => 'User validate Ok');
         }
