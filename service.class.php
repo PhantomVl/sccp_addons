@@ -22,9 +22,12 @@ class service {
     public $sys_mode = 'hw';
     public $req_data = array();
     private $form_path = '';
-
+    
+    
+/*
+ *      
+ */
     public function __construct() {
-// Init
         $this->conf_path = __DIR__;
         if (file_exists(__DIR__ . '/cisco_service.ini')) {
             $int_conf = parse_ini_file(__DIR__ . "/cisco_service.ini", true);
@@ -42,7 +45,6 @@ class service {
             $request['id'] = rand();
         }
 
-//        $this->xml_url = $this->host_url . '?' . $this->array_key2str($request, '=', '&amp;');
         $this->xml_url = $this->host_url . '?' . $this->array_key2str($request, '=', '&amp;', array('exclude' => array('action')));
         $driverNamespace = "\\cisco\service";
         if (class_exists($driverNamespace, false)) {
@@ -67,7 +69,7 @@ class service {
         if (!empty($request['locale'])) {
             $loc_code = $this->extconfigs->getextConfig('locale2code', $request['locale']);
             if (!empty($loc_code)) {
-                if (file_exists(__DIR__ . '/views/' . $loc_code . '/service.xml.php')) {
+                if (file_exists(__DIR__ . '/views/' . $loc_code . '/service.cxml.php')) {
                     $this->form_path = __DIR__ . '/views/' . $loc_code . '/';
                 }
             }
@@ -95,7 +97,10 @@ class service {
 
 //        $this->aminterface->_init($this->conf_ami);
     }
-
+    
+/*
+ *  Load config informarion
+ */
     private function init_path($int_conf) {
         $amp_dbkey = array('AMPDBUSER' => 'username', 'AMPDBPASS' => 'password', 'AMPDBHOST' => 'host', 'AMPDBNAME' => 'db', 'AMPDBENGINE' => 'db_engine');
         $amp_amikey = array('ASTMANAGERHOST' => 'server', 'AMPMGRPASS' => 'secret', 'ASTMANAGERPORT' => 'port', 'AMPMGRUSER' => 'username');
@@ -129,7 +134,11 @@ class service {
             }
         }
     }
-
+    
+/*
+ *  Request processing
+ *  Lofin, Logout
+ */
     public function request_processing() {
         $request = $_REQUEST;
 //        $req_fld = Array('sessionid',  'locale', 'name',);
@@ -196,7 +205,10 @@ class service {
                 }
                 $empy_rep = $this->get_empty_key($request, Array('name', 'sessionid', 'userid', 'pincode', 'locale'));
                 if (!empty($empy_rep)) {
-                    $this->page_text = 'Request Faild :' . print_r($empy_rep, 1);
+                    $this->page_text = 'Request Faild : ';
+                    foreach ($empy_rep as $evalue) {
+                        $this->page_text .= $evalue.' ';
+                    }
                     $this->view_action = 'error';
                     break;
                 }
