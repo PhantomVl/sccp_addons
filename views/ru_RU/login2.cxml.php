@@ -6,7 +6,7 @@ $INFO = $this-> page_text;
 <?xml version="1.0" encoding="utf-8" ?>
 <CiscoIPPhoneText>
   <Title><?php echo $PAGE_Prefix;?> INFO</Title>
-  <Prompt>INFO</Prompt>
+  <Prompt>Инфо</Prompt>
   <Text><?php echo $INFO;?></Text>  
   <SoftKeyItem>
       <Name>Exit</Name>
@@ -14,12 +14,12 @@ $INFO = $this-> page_text;
       <Position>1</Position>
   </SoftKeyItem>
   <SoftKeyItem> 
-      <Name>Logout</Name>
+      <Name>Отключить</Name>
       <URL><?php echo $URL_srv;?>&amp;action=login&amp;logoff=yes</URL>
       <Position>3</Position>
   </SoftKeyItem>
   <SoftKeyItem>
-      <Name>Service</Name>
+      <Name>Сервис</Name>
       <URL>Init:Services</URL>
 <?php //      <URL>Init:Directories</URL>   ?>  
       <Position>4</Position>

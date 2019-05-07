@@ -3,6 +3,7 @@ $URL_srv = $this->xml_url;
 $PAGE_Prefix = $this-> page_title;
 $INFO = $this-> page_text;
 ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <CiscoIPPhoneText>
   <Title><?php echo $PAGE_Prefix;?> INFO</Title>
   <Prompt>INFO</Prompt>

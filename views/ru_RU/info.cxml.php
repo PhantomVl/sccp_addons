@@ -5,23 +5,17 @@ $INFO = $this-> page_text;
 ?>
 <?xml version="1.0" encoding="utf-8" ?>
 <CiscoIPPhoneText>
-  <Title><?php echo $PAGE_Prefix;?> INFO</Title>
-  <Prompt>INFO</Prompt>
+  <Title><?php echo $PAGE_Prefix;?> ИНФО</Title>
+  <Prompt>Информация</Prompt>
   <Text><?php echo $INFO;?></Text>  
   <SoftKeyItem>
       <Name>Exit</Name>
       <URL>SoftKey:Exit</URL>
       <Position>1</Position>
   </SoftKeyItem>
-  <SoftKeyItem> 
-      <Name>Logout</Name>
-      <URL><?php echo $URL_srv;?>&amp;action=login&amp;logoff=yes</URL>
-      <Position>3</Position>
-  </SoftKeyItem>
   <SoftKeyItem>
-      <Name>Service</Name>
+      <Name>Сервис</Name>
       <URL>Init:Services</URL>
-<?php //      <URL>Init:Directories</URL>   ?>  
       <Position>4</Position>
   </SoftKeyItem>
 

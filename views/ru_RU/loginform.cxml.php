@@ -5,16 +5,16 @@ $PAGE_Prefix = $this-> page_title;
 ?>
 <?xml version="1.0" encoding="utf-8" ?>
 <CiscoIPPhoneInput>
-  <Title><?php echo $PAGE_Prefix;?> Login</Title>
-  <Prompt>User Login</Prompt>
+  <Title><?php echo $PAGE_Prefix;?> Авторизация</Title>
+  <Prompt>Ваша Учетная запись</Prompt>
   <URL><?php echo $URL_srv;?>&amp;action=login</URL>
   <InputItem>
-    <DisplayName>Name</DisplayName>
+    <DisplayName>Аб.Номер</DisplayName>
     <QueryStringParam>userid</QueryStringParam>
     <InputFlags>N</InputFlags>
   </InputItem>
   <InputItem>
-    <DisplayName>Pin</DisplayName>
+    <DisplayName>ПинКод</DisplayName>
     <QueryStringParam>pincode</QueryStringParam>
     <InputFlags>NP</InputFlags>
   </InputItem>

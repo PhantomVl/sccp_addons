@@ -4,13 +4,13 @@ $PAGE_Prefix = $this-> page_title;
 ?>
 <?xml version="1.0" encoding="utf-8" ?>
 <CiscoIPPhoneMenu>
-  <Title><?php echo $PAGE_Prefix;?> Directory</Title>
+  <Title><?php echo $PAGE_Prefix;?> Сервис</Title>
   <MenuItem>
-      <Name>Login</Name>
+      <Name>Вход</Name>
       <URL><?php echo $URL_srv;?>&amp;action=loginform</URL>
   </MenuItem>
   <?php if ($this ->dev_login !== false) {
-    echo '<MenuItem><Name>Logout</Name><URL>'.$URL_srv.'&amp;action=logout</URL></MenuItem>';
+    echo '<MenuItem><Name>Покинуть устройство</Name><URL>'.$URL_srv.'&amp;action=logout</URL></MenuItem>';
    }?>
   <SoftKeyItem>
    <Name>Select</Name>
